@@ -55,6 +55,7 @@ func GetSupportedGitProviders() []GitProvider {
 		{"codeberg", "Codeberg"},
 		{"gitea", "Gitea"},
 		{"gitness", "Gitness"},
+		{"gogs", "Gogs"},
 		{"azure-devops", "Azure DevOps"},
 		{"aws-codecommit", "AWS CodeCommit"},
 	}
@@ -80,6 +81,8 @@ func GetDocsLinkFromGitProvider(providerId string) string {
 		return "https://docs.gitea.com/1.21/development/api-usage#generating-and-listing-api-tokens"
 	case "gitness":
 		return "https://docs.gitness.com/administration/user-management#generate-user-token"
+	case "gogs":
+		return "https://github.com/gogs/docs-api?tab=readme-ov-file#access-token"
 	case "azure-devops":
 		return "https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat"
 	case "aws-codecommit":
@@ -108,6 +111,8 @@ func GetRequiredScopesFromGitProviderId(providerId string) string {
 	case "gitea":
 		return "read:organization,write:repository,read:user"
 	case "gitness":
+		return "/"
+	case "gogs":
 		return "/"
 	case "azure-devops":
 		return "Code (Status, Read & Write); User Profile (Read); Project and Team (Read)"
@@ -145,6 +150,8 @@ func GetWebhookEventHeaderKeyFromGitProvider(providerId string) string {
 		return "X-Event-Key"
 	case "gitea":
 		return "X-Gitea-Event"
+	case "gogs":
+		return "X-Gogs-Event"
 	case "azure-devops":
 		return "X-AzureDevops-Event"
 	default:
